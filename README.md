@@ -52,6 +52,7 @@ Como el análisis combina una fuente CC BY-SA, las tablas y gráficos derivados 
 | `datos/empresas_bogota_limpio.csv` | Base limpia de empresas (del repo [bogota-business-births](https://github.com/Sebaspadi97/bogota-business-births)) |
 | `datos/poblacion_localidad.csv` | Proyecciones de población por localidad 2005–2035 (Datos Abiertos Bogotá) |
 | `scripts/analisis_cafe.py` | Código reproducible |
+| `fuentes/` | Tipografías de la marca (Montserrat y Open Sans, licencia SIL Open Font License) usadas en los gráficos |
 
 Para reproducir: `pip install -r requirements.txt` y luego `python scripts/analisis_cafe.py datos/empresas_bogota_limpio.csv datos/poblacion_localidad.csv .`
 
@@ -61,11 +62,11 @@ Para reproducir: `pip install -r requirements.txt` y luego `python scripts/anali
 - **Las empresas registradas no son trabajadores:** Chapinero concentra sedes legales, lo que puede inflar su demanda diurna.
 - **Solo competencia formal y registrada:** la venta informal de tinto no aparece. Tampoco se cuentan los restaurantes ni las tiendas que venden café.
 - **Un solo corte (mar 2026)** para la oferta.
-- Gráficos en tipografía Inter; para el sitio se rehacen en Montserrat / Open Sans.
 
 ## Licencia
 - **Código** (`scripts/`): © 2026 Sebastián Padilla Castaño. Todos los derechos reservados. Puedes leerlo y ejecutarlo para revisar el análisis, pero no reutilizarlo ni redistribuirlo sin autorización.
 - **Datos, tablas y gráficos:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.es). Los datos de `datos/`, las tablas y los gráficos combinan una fuente CC BY-SA 4.0 (Dinámica Empresarial) y una CC BY 4.0 (proyecciones de población). Por eso se comparten bajo CC BY-SA 4.0.
+- **Tipografías** (`fuentes/`): Montserrat y Open Sans, bajo SIL Open Font License 1.1 (ver `fuentes/OFL-*.txt`).
 - Ver `LICENSE.md`.
 
 ---

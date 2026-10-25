@@ -84,10 +84,14 @@ with pd.ExcelWriter(os.path.join(OUT, "tablas", "resultados_donde_abrir_cafe.xls
 t[cols].round(3).to_csv(os.path.join(OUT, "tablas", "ranking_localidades.csv"), encoding="utf-8-sig")
 
 # ---------- 4. Gráficos (paleta SP Lab) ----------
-for f in fm.findSystemFonts():
-    if "Inter" in f:
-        fm.fontManager.addfont(f)
-plt.rcParams.update({"font.family": "Inter", "font.size": 10.5, "axes.spines.top": False, "axes.spines.right": False,
+FUENTES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "fuentes")
+for f in sorted(os.listdir(FUENTES)) if os.path.isdir(FUENTES) else []:
+    if f.endswith(".ttf"):
+        fm.fontManager.addfont(os.path.join(FUENTES, f))
+_disp = {x.name for x in fm.fontManager.ttflist}
+TITULO = "Montserrat" if "Montserrat" in _disp else "DejaVu Sans"   # títulos (marca SP Lab)
+TEXTO = "Open Sans" if "Open Sans" in _disp else "DejaVu Sans"      # textos y etiquetas
+plt.rcParams.update({"font.family": TEXTO, "font.size": 10.5, "axes.spines.top": False, "axes.spines.right": False,
                      "figure.facecolor": "#F8FAF7", "axes.facecolor": "#F8FAF7"})
 VERDE, GRIS, CARBON, DORADO, NEUTRO = "#245B45", "#66736C", "#202824", "#D6A64F", "#B9C2BC"
 fmt = lambda v, d=0: f"{v:,.{d}f}".replace(",", "X").replace(".", ",").replace("X", ".")
@@ -97,7 +101,7 @@ cuad = t[(t.adultos_por_competidor > ciudad.adultos_por_competidor) & (t.empresa
 top3 = cuad  # resaltado: localidades por encima de Bogotá en ambas demandas
 
 def encabezado(fig, ti, sub):
-    fig.text(0.02, 0.965, ti, fontsize=15, fontweight="bold", color=CARBON, va="top")
+    fig.text(0.02, 0.965, ti, fontsize=15, fontweight="bold", fontfamily=TITULO, color=CARBON, va="top")
     fig.text(0.02, 0.91, sub, fontsize=10.5, color=GRIS, va="top")
     fig.text(0.02, 0.02, pie_txt, fontsize=7.5, color=GRIS)
 
@@ -139,7 +143,7 @@ for ax, col, ref, nom in [(axes[0], "adultos_por_competidor", ciudad.adultos_por
     for k, v in enumerate(r.values):
         ax.text(v * 1.02, k, fmt(v), va="center", fontsize=9, color=CARBON,
                 bbox=dict(facecolor="#F8FAF7", edgecolor="none", pad=0.5))
-    ax.set_title(nom, loc="left", fontsize=11, color=CARBON, fontweight="bold")
+    ax.set_title(nom, loc="left", fontsize=11, color=CARBON, fontweight="bold", fontfamily=TITULO)
     ax.set_xticks([]); ax.tick_params(axis="y", length=0, colors=CARBON)
     for sp in ["left", "bottom"]: ax.spines[sp].set_visible(False)
     ax.set_xlim(0, r.max() * 1.22)
